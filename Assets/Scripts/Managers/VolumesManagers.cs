@@ -2,24 +2,22 @@ using UnityEngine;
 using NaughtyAttributes;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using DG.Tweening;
 
-
-[RequireComponent(typeof(Volume))]
 public class VolumesManagers : MonoBehaviour
 {
     [Header("Test Volume Settings")]
-    [SerializeField] private Volume _StartVolume;
     [SerializeField] private Volume _TargetVolume;
 
 
     VolumesManagers instance;
+    Volume _CurrentVolume;
     
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -33,5 +31,26 @@ public class VolumesManagers : MonoBehaviour
         Camera.main.GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = true;
     }
 
-    public void 
+    private void SetActiveVolume(float duration, Volume targetVolume)
+    {
+        if (_CurrentVolume != null)
+        {
+            DOTween.To(() => _CurrentVolume.weight, x => _CurrentVolume.weight = x, 0, duration).OnComplete(() =>
+            {
+                _CurrentVolume = targetVolume;
+                DOTween.To(() => _CurrentVolume.weight, x => _CurrentVolume.weight = x, 1, duration);
+            });
+        }
+        else
+        {
+            _CurrentVolume = targetVolume;
+            DOTween.To(() => _CurrentVolume.weight, x => _CurrentVolume.weight = x, 1, duration);
+        }
+    }
+
+    [Button("Test Volume Transition")]
+    public void TestVolumeTransition()
+    {
+        SetActiveVolume(1, _TargetVolume);
+    }
 }
