@@ -15,6 +15,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource SFXSource;
 
 
+    [Header("Sounds Parameters")]
+    [SerializeField] string backgroundName;
+    [SerializeField] string SFXName;
 
     private void Awake()
     {
@@ -83,9 +86,11 @@ public class AudioManager : MonoBehaviour
         SFXSource.PlayOneShot(clip);
     }*/
 
-    public void PlaySFX(string name)
+    [NaughtyAttributes.Button]
+    public void PlaySFX()
     {
-        AudioStruct s = Array.Find(AudioStruct, sound => sound.name == name);
+        if (AudioStruct == null || AudioStruct.Length==0 && SFXName.Length <=0) return;
+        AudioStruct s = Array.Find(AudioStruct, sound => sound.name == SFXName);
 
         SFXSource.volume = s.volume;
         SFXSource.pitch = s.pitch;
@@ -93,11 +98,20 @@ public class AudioManager : MonoBehaviour
         SFXSource.PlayOneShot(s.audioClips[UnityEngine.Random.Range(0, s.audioClips.Length)], SFXSource.volume);
     }
 
+    [NaughtyAttributes.Button]
     public void PlayBackground()
     {
-        Sounds s = BGSounds[UnityEngine.Random.Range(0, BGSounds.Length)];
-        //Sounds s = Array.Find(BGSounds, sound => sound.name == name);
-
+        if(BGSounds == null || BGSounds.Length == 0) return;
+        Sounds s;
+        if (backgroundName.Length>0)
+        {
+             s = Array.Find(BGSounds, music => music.name == backgroundName);
+        }
+        else
+        {
+            s = BGSounds[UnityEngine.Random.Range(0, BGSounds.Length)];
+        }
+        Debug.Log("Playing Background: " + s);
         musicSource.clip = s.audioClip;
         musicSource.volume = s.volume;
         musicSource.pitch = s.pitch;
