@@ -33,5 +33,5 @@ public class VolumesManagers : MonoBehaviour
         Camera.main.GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = true;
     }
 
-    public void 
+    
 }
