@@ -4,22 +4,27 @@ public class FollowerController : MonoBehaviour
 {
     NavMeshAgent _navMeshAgent;
 
-    Rigidbody _rigidbody;
+    GameObject _player;
     void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
     void Update()
     {
-        // detect mouse click with new input system
-        if (Input.GetMouseButtonDown(0))
+        // C'est dégueulasse mais on a pas trop de temps. On verra si ca tiens pour les besoins du projet.
+        if (_player != null)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            float distance = Vector3.Distance(transform.position, _player.transform.position);
+            if (distance > 1f)
             {
-                print(hit.point);
-                _navMeshAgent.SetDestination(hit.point);
+                _navMeshAgent.isStopped = false;
+                _navMeshAgent.SetDestination(_player.transform.position);
+                _navMeshAgent.speed = Mathf.Clamp(distance, 1f, 30f);
+            }
+            else
+            {
+                _navMeshAgent.isStopped = true;
             }
         }
     }
