@@ -31,26 +31,5 @@ public class VolumesManagers : MonoBehaviour
         Camera.main.GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = true;
     }
 
-    private void SetActiveVolume(float duration, Volume targetVolume)
-    {
-        if (_CurrentVolume != null)
-        {
-            DOTween.To(() => _CurrentVolume.weight, x => _CurrentVolume.weight = x, 0, duration).OnComplete(() =>
-            {
-                _CurrentVolume = targetVolume;
-                DOTween.To(() => _CurrentVolume.weight, x => _CurrentVolume.weight = x, 1, duration);
-            });
-        }
-        else
-        {
-            _CurrentVolume = targetVolume;
-            DOTween.To(() => _CurrentVolume.weight, x => _CurrentVolume.weight = x, 1, duration);
-        }
-    }
-
-    [Button("Test Volume Transition")]
-    public void TestVolumeTransition()
-    {
-        SetActiveVolume(1, _TargetVolume);
-    }
+    
 }
