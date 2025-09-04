@@ -5,22 +5,41 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
 
-    void Start()
-    {
+    private Rigidbody2D rb;
+    public float moveSpeed = 5f;
+    private Vector2 moveInput;
 
-    }
-    void Update()
+    private void Awake()
     {
-
-    }
-
-    public void Move(Vector2 direction)
-    {
-        Debug.Log("Moving: " + direction);
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Interact()
+    //private void OnEnable()
+    //{
+    //    EventManager.instance.onMove.AddListener(OnMove);
+    //    EventManager.instance.onInteract.AddListener(OnInteract);
+    //}
+
+    //private void OnDisable()
+    //{
+    //    EventManager.instance.onMove.RemoveListener(OnMove);
+    //    EventManager.instance.onInteract.RemoveListener(OnInteract);
+    //}
+
+    private void FixedUpdate()
     {
-        Debug.Log("Interacting");
+        rb.linearVelocity = moveInput * moveSpeed;
     }
+
+    public void OnMove(Vector2 direction)
+    {
+        EventManager.instance.onMove.Invoke(direction);
+        moveInput = direction;
+    }
+
+    public void OnInteract()
+    {
+        Debug.Log("Interaction déclenchée depuis le PlayerController.");
+    }
+
 }

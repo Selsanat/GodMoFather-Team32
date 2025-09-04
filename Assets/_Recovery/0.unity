@@ -603,7 +603,6 @@ MonoBehaviour:
   onRadioFrequencyLeft:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 1597979843}
   moveSpeed: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

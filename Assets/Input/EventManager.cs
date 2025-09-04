@@ -6,33 +6,17 @@ public class EventManager : MonoBehaviour
 {
     public static EventManager instance;
 
-    
     [Header("Input Actions")]
     public InputAction moveAction;
     public InputAction interactAction;
     public InputAction radioFrequencyRight;
     public InputAction radioFrequencyLeft;
 
-    [Header("Unity Event")]
+    [Header("Unity Events")]
     public UnityEvent<Vector2> onMove;
     public UnityEvent onInteract;
     public UnityEvent onRadioFrequencyRight;
     public UnityEvent onRadioFrequencyLeft;
-
-    private Rigidbody2D rb;
-    public float moveSpeed = 5f;
-    private Vector2 direction;
-
-    public void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    public void Update()
-    {
-        rb.linearVelocity = direction * moveSpeed;
-    }
-
 
     private void Awake()
     {
@@ -44,7 +28,7 @@ public class EventManager : MonoBehaviour
         instance = this;
     }
 
-    public void OnEnable()
+    private void OnEnable()
     {
         moveAction.Enable();
         interactAction.Enable();
@@ -53,15 +37,12 @@ public class EventManager : MonoBehaviour
 
         moveAction.performed += OnMovePerformed;
         moveAction.canceled += OnMoveCanceled;
-
+        interactAction.performed += OnInteractPerformed;
         radioFrequencyRight.performed += OnRadioFrequencyRight;
         radioFrequencyLeft.performed += OnRadioFrequencyLeft;
-
-        interactAction.performed += OnInteractPerformed;
     }
 
-
-    public void OnDisable()
+    private void OnDisable()
     {
         moveAction.Disable();
         interactAction.Disable();
@@ -70,57 +51,37 @@ public class EventManager : MonoBehaviour
 
         moveAction.performed -= OnMovePerformed;
         moveAction.canceled -= OnMoveCanceled;
-
+        interactAction.performed -= OnInteractPerformed;
         radioFrequencyRight.performed -= OnRadioFrequencyRight;
         radioFrequencyLeft.performed -= OnRadioFrequencyLeft;
-
-        interactAction.performed -= OnInteractPerformed;
     }
 
-    #region Input Callbacks
-    public void OnMovePerformed(InputAction.CallbackContext context)
+    #region input Callbacks
+
+    private void OnMovePerformed(InputAction.CallbackContext context)
     {
-        if(context.performed)
-        {
-            Debug.Log(direction);
-            direction = context.ReadValue<Vector2>();
-        }
-        else
-        {
-            OnMoveCanceled(context);
-        }
+        Vector2 direction = context.ReadValue<Vector2>();
+        onMove?.Invoke(direction); 
     }
 
-    public void OnMoveCanceled(InputAction.CallbackContext context)
+    private void OnMoveCanceled(InputAction.CallbackContext context)
     {
-        if(context.canceled)
-        {
-            direction = Vector2.zero;
-        }
+        onMove?.Invoke(Vector2.zero); 
     }
 
-    public void OnInteractPerformed(InputAction.CallbackContext context)
+    private void OnInteractPerformed(InputAction.CallbackContext context)
     {
-        if(context.performed)
-        {
-            
-        }
+        onInteract?.Invoke(); 
     }
 
-    public void OnRadioFrequencyRight(InputAction.CallbackContext context)
+    private void OnRadioFrequencyRight(InputAction.CallbackContext context)
     {
-
+        onRadioFrequencyRight?.Invoke(); 
     }
 
-    public void OnRadioFrequencyLeft(InputAction.CallbackContext context)
+    private void OnRadioFrequencyLeft(InputAction.CallbackContext context)
     {
-
-    }
-
-    public void Pause()
-    {
-
+        onRadioFrequencyLeft?.Invoke(); 
     }
     #endregion
-
 }
