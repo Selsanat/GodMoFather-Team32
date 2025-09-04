@@ -15,7 +15,7 @@ public class CarController : MonoBehaviour
     {
         if(collision.GetComponent<Intersection>() != null)
         {
-            collision.GetComponent<Intersection>().OnCollidedWithPlayer();
+            collision.GetComponent<Intersection>().OnCollidedWithPlayer(gameObject);
         }
     }
 }

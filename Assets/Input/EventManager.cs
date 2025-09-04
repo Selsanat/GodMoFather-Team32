@@ -17,6 +17,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent onInteract;
     public UnityEvent onRadioFrequencyRight;
     public UnityEvent onRadioFrequencyLeft;
+    public UnityEvent onChosingPlayerPath;
 
     private void Awake()
     {
