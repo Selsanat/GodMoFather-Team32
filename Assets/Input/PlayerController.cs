@@ -34,12 +34,8 @@ public class PlayerController : MonoBehaviour
     public void OnMove(Vector2 direction)
     {
         EventManager.instance.onMove.Invoke(direction);
-        moveInput = direction;
-    }
 
-    public void OnInteract()
-    {
-        Debug.Log("Interaction déclenchée depuis le PlayerController.");
+        moveInput = direction;
     }
 
 }
