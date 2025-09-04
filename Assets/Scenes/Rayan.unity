@@ -285,9 +285,9 @@ MonoBehaviour:
       m_Action: Car Controls
       m_Flags: 8
     m_Flags: 0
-  maxSpeed: 0
+  maxSpeed: 50
   turnTime: 1
-  acceleration: 0
+  acceleration: 0.31
 --- !u!61 &453722956
 BoxCollider2D:
   m_ObjectHideFlags: 0

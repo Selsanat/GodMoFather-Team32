@@ -44,14 +44,16 @@ public class CarMovement : MonoBehaviour
 
         float newRotation = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg - 90f;
         
+
+        rb.linearVelocity = transform.up * Time.deltaTime * maxSpeed;
         float time =+ Time.deltaTime;
 
-        if(time< turnTime)
-        {
-            float tAcceleration = Mathf.Clamp01(time / acceleration);
-            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, input.normalized * maxSpeed, tAcceleration);
+        //if(time< turnTime)
+        //{
+        //    float tAcceleration = Mathf.Clamp01(time / acceleration);
+        //    rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, input.normalized * maxSpeed, tAcceleration);
             
-        }
+        //}
         if (input.magnitude > 0)
         {
             float tRotation = Mathf.Clamp01(time/turnTime);
