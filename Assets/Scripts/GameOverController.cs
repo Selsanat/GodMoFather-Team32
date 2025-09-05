@@ -48,6 +48,7 @@ public class GameOverController : MonoBehaviour
                 3f
             ).SetEase(Ease.OutQuad).OnComplete(() =>
             {
+                AudioManager.instance.PlaySFX("Catch");
                 canvasGroup.DOFade(1f, 2f);
                 HasGameEnded = true;
             });

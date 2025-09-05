@@ -15,6 +15,7 @@ public class WavesManager : MonoBehaviour
     bool areFaded = false;
     bool wasAmplitudeMatching = false; // Nouveau : pour suivre l'état précédent
 
+
     void Start()
     {
         timer = duration;
@@ -54,6 +55,7 @@ public class WavesManager : MonoBehaviour
             
             if (currentAmplitudeMatching)
             {
+                AudioManager.instance.PlaySFX("Amplitude");
                 PoliceManager.Instance.FadeAllPoliceCars(1);
             }
             else
@@ -104,6 +106,7 @@ public class WavesManager : MonoBehaviour
         if (playerWave.amplitude >= (policeWave.amplitude - offset) && playerWave.amplitude <= (policeWave.amplitude + offset))
         {
             CancelInvoke("RandomizePoliceWave");
+            
             return true;
         }
         return false;
