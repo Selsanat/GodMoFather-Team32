@@ -104,8 +104,12 @@ public class AudioManager : MonoBehaviour
         //if (AudioStruct == null || AudioStruct.Length==0 && SFXName.Length <=0) return;
         AudioStruct s = Array.Find(AudioStruct, sound => sound.name == name);
 
+        if (name == "Move")
+        {
+            SFXSource.pitch = UnityEngine.Random.Range(0.5f, 1f);
+        }
+        else SFXSource.pitch = s.pitch;
         SFXSource.volume = s.volume;
-        SFXSource.pitch = s.pitch;
         SFXSource.loop = s.loop;
         SFXSource.PlayOneShot(s.audioClips[UnityEngine.Random.Range(0, s.audioClips.Length)], SFXSource.volume);
     }

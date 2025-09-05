@@ -34,7 +34,6 @@ public class PoliceController : MonoBehaviour
     {
 
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-        print(distanceToPlayer);
         float targetAlpha = distanceToPlayer < DistanceToAppear ? 1f : 0f;
         Color color = spriteRenderer.color;
         color.a = Mathf.Lerp(color.a, targetAlpha, Time.deltaTime * 2f);

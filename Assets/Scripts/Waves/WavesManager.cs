@@ -15,6 +15,19 @@ public class WavesManager : MonoBehaviour
     bool areFaded = false;
     bool wasAmplitudeMatching = false; // Nouveau : pour suivre l'�tat pr�c�dent
 
+    public static WavesManager ins;
+    private void Awake()
+    {
+        if (ins == null)
+        {
+            ins = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         timer = duration;
@@ -54,7 +67,7 @@ public class WavesManager : MonoBehaviour
             
             if (currentAmplitudeMatching)
             {
-                AudioManager.instance.PlaySFX("Amplitude");
+                AudioManager.instance.PlaySFX("AmplitudeDone");
                 PoliceManager.Instance.FadeAllPoliceCars(1);
             }
             else
@@ -76,11 +89,9 @@ public class WavesManager : MonoBehaviour
 
             if (gamepad != null)
             {
-                // Lire les valeurs des g�chettes (0.0 � 1.0)
                 float rightTrigger = gamepad.rightTrigger.ReadValue();
                 float leftTrigger = gamepad.leftTrigger.ReadValue();
 
-                // D�tection avec seuil
                 if (rightTrigger > 0.1f)
                 {
                     playerWave.amplitude -= valueChange * Time.deltaTime * speed;
