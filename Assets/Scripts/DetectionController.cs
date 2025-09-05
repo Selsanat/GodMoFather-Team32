@@ -15,10 +15,10 @@ public class DetectionController : MonoBehaviour
     private void Update()
     {
         // Make simple and quick movement zqsd with the attached rigidbody2D
-        float moveX = Input.GetAxis("Horizontal");
-        float moveY = Input.GetAxis("Vertical");
-        Vector2 movement = new Vector2(moveX, moveY);
-        GetComponent<Rigidbody2D>().linearVelocity = movement * 5f;
+        //float moveX = Input.GetAxis("Horizontal");
+        //float moveY = Input.GetAxis("Vertical");
+        //Vector2 movement = new Vector2(moveX, moveY);
+        //GetComponent<Rigidbody2D>().linearVelocity = movement * 5f;
 
     }
 

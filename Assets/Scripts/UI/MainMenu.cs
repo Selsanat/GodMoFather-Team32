@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     public CanvasGroup MenuCanvasGroup;
     public CanvasGroup BackgroundCanvasGroup;
-    public string NextSceneName = "Leandro";
+    public string NextSceneName = "Scene_Test_GD";
     private bool _AnyKeyPressed = false;
 
     private void Start()
