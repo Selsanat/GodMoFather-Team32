@@ -1,4 +1,5 @@
 using DG.Tweening;
+using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,6 +10,7 @@ public class GameOverController : MonoBehaviour
     public static GameOverController Instance;
     public bool HasGameEnded = false;
     public CinemachineCamera Camera;
+    [SerializeField] private TextMeshProUGUI nbr_Follower;
     private void Awake()
     {
         if (Instance == null)
@@ -33,6 +35,7 @@ public class GameOverController : MonoBehaviour
     {
         if (HasGameEnded) return;
         // get first canvas group in child, and fade it in
+        nbr_Follower.text = "Followers Caught: " + GameManager.followers;
         CanvasGroup canvasGroup = GetComponentInChildren<CanvasGroup>();
         if (canvasGroup != null)
         {
