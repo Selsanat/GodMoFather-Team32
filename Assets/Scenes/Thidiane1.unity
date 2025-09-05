@@ -393,9 +393,105 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1648072756}
+        m_TargetAssemblyTypeName: EventManager, Assembly-CSharp
+        m_MethodName: OnMoveRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e23699bc-8097-4d6e-9885-dc75f5e970ec
+    m_ActionName: 'Player Top Down Runner/Turn[/Keyboard/q,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1648072756}
+        m_TargetAssemblyTypeName: EventManager, Assembly-CSharp
+        m_MethodName: OnRadioFrequencyRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6e81b252-8a16-4114-a5c1-9cf7b2b8a934
+    m_ActionName: Player Top Down Runner/RadioFrequency
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1648072756}
+        m_TargetAssemblyTypeName: EventManager, Assembly-CSharp
+        m_MethodName: OnMoveLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1804155e-c7ef-4f17-be17-fb8fa0daa057
+    m_ActionName: 'Player Top Down Runner/TurnLeft[/Keyboard/q,/Keyboard/leftArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1648072756}
+        m_TargetAssemblyTypeName: EventManager, Assembly-CSharp
+        m_MethodName: OnRadioFrequencyLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: babf58b7-1d46-4b2c-99dc-61705c1a0848
+    m_ActionName: Player Top Down Runner/RadioFrequencyLeft
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1648072756}
+        m_TargetAssemblyTypeName: EventManager, Assembly-CSharp
+        m_MethodName: OnMoveUp
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 82239bed-eeb9-4030-8622-2899da232481
+    m_ActionName: 'Player Top Down Runner/TurnUp[/Keyboard/z,/Keyboard/upArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1648072756}
+        m_TargetAssemblyTypeName: EventManager, Assembly-CSharp
+        m_MethodName: OnMoveDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 380bd100-87d7-4452-a99c-2b8d88c7b592
+    m_ActionName: 'Player Top Down Runner/TurnDown[/Keyboard/s,/Keyboard/downArrow]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Player Top Down Runner
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!50 &1597979843
@@ -491,8 +587,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1597979840}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.06663, y: 0.52419, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.066630006, y: 0.52419, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -555,20 +651,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f06c17b366171f4c83ed80127298836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EventManager
-  moveAction:
-    m_Name: Move
+  moveRight:
+    m_Name: Move Right
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: c3ef12c8-ce7b-48d5-9728-b8da8bb5b22f
+    m_Id: ab7924af-b401-4c3f-b353-c7042ffb1047
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  interactAction:
-    m_Name: Interact
+  MoveLeft:
+    m_Name: Move Left
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 56121b06-8feb-4709-a308-bf46d4658740
+    m_Id: e0117e7f-39ef-4503-8177-a83a75bc6f4e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  MoveUp:
+    m_Name: Move Up
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 92b860a8-dfdc-4a7b-bf9a-c558e5060728
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  MoveDown:
+    m_Name: Move Down
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ae108b6b-c8e9-4af1-9678-9f94dd62f278
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -603,8 +717,9 @@ MonoBehaviour:
   onRadioFrequencyLeft:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 1597979843}
-  moveSpeed: 5
+  onChosingPlayerPath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
