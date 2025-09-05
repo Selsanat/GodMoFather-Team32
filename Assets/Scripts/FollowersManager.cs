@@ -29,7 +29,7 @@ public class FollowersManager : MonoBehaviour
     
     public void SpawnFollower(Vector3 position)
     {
-
+        AudioManager.instance.PlaySFX("Follower");
         GameManager.followers++;
         GameObject follower = Instantiate(followerPrefab, position, Quaternion.identity);
         followers.Add(follower);
@@ -69,6 +69,7 @@ public class FollowersManager : MonoBehaviour
     [NaughtyAttributes.Button]
     public void Spawn()
     {
+        
         GameObject follower = Instantiate(followerPrefab, transform.position, Quaternion.identity);
         followers.Add(follower);
     }
