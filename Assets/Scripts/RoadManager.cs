@@ -4,10 +4,12 @@ using NaughtyAttributes;
 using System.Collections.Generic;
 using DG.Tweening;
 using System.Linq;
+using UnityEngine.InputSystem;
 
 public class RoadManager : MonoBehaviour
 {
     public static RoadManager Instance;
+    public PlayerInput playerInput;
     private void Awake()
     {
         if (Instance == null)
@@ -22,7 +24,7 @@ public class RoadManager : MonoBehaviour
 
     [HideInInspector] public CarController PlayerCar;
     [HideInInspector] public PoliceController PoliceCar;
-    [HideInInspector] public bool WaitForInput = false;
+    [HideInInspector] public bool WaitForInput = true;
     [HideInInspector] public Dictionary<GameObject, Intersection> CurrentIntersections = new Dictionary<GameObject, Intersection>();
     public void MakePlayerFollowSpline(SplineContainer splineContainer)
     {
@@ -39,6 +41,9 @@ public class RoadManager : MonoBehaviour
         if (intersection.Down != null) availableTurns.Add(intersection.Down.GetComponent<SplineContainer>());
         if (intersection.Left != null) availableTurns.Add(intersection.Left.GetComponent<SplineContainer>());
         if (intersection.Right != null) availableTurns.Add(intersection.Right.GetComponent<SplineContainer>());
+
+        SplineContainer currentSpline = PoliceCar.GetComponent<SplineAnimate>().Container;
+        availableTurns = availableTurns.Where(s => s != currentSpline).ToList();
         int random = Random.Range(0, availableTurns.Count);
         SplineContainer randomTurn = availableTurns[random];
         LerpCarToFirstPoint(PoliceCar, randomTurn);
@@ -78,6 +83,33 @@ public class RoadManager : MonoBehaviour
     public void ReverseKnotsOrder(SplineContainer splineContainer)
     {
         splineContainer.ReverseFlow(0);
+    }
+
+    void Update()
+    {
+        if (playerInput != null)
+        {
+            if (WaitForInput && CurrentIntersections.ContainsKey(PlayerCar.gameObject) && CurrentIntersections[PlayerCar.gameObject] != null)
+            {
+                Vector2 dpadInput = playerInput.actions["Move"].ReadValue<Vector2>();
+                if (dpadInput.y > 0.5f && CurrentIntersections[PlayerCar.gameObject].Up != null)
+                {
+                    GoUp();
+                }
+                else if (dpadInput.y < -0.5f && CurrentIntersections[PlayerCar.gameObject].Down != null)
+                {
+                    GoDown();
+                }
+                else if (dpadInput.x < -0.5f && CurrentIntersections[PlayerCar.gameObject].Left != null)
+                {
+                    GoLeft();
+                }
+                else if (dpadInput.x > 0.5f && CurrentIntersections[PlayerCar.gameObject].Right != null)
+                {
+                    GoRight();
+                }
+            }
+        }
     }
 
     [Button("Go Up")]

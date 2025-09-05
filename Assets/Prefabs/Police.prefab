@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2883165213551922610}
   m_Layer: 0
   m_Name: Police
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,9 +29,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 991025877201871219}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.01000055, y: -0.9999501, z: -0.00000021073426, w: 0.000000002304906}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -17.493847, y: -13.832291, z: -0.9200657}
-  m_LocalScale: {x: 0.6, y: 1.170614, z: 0.6920416}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,9 +82,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0.11743784, b: 1, a: 1}
+  m_SortingOrder: 20
+  m_Sprite: {fileID: 6715957911979874120, guid: fa4080bee68af6e49b072fbbc38356ce, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -110,11 +110,11 @@ MonoBehaviour:
   m_PlayOnAwake: 1
   m_LoopMode: 0
   m_Method: 1
-  m_Duration: 1
+  m_Duration: 1.0196508
   m_MaxSpeed: 5
   m_EasingMode: 0
   m_AlignmentMode: 1
-  m_ObjectForwardAxis: 1
+  m_ObjectForwardAxis: 0
   m_ObjectUpAxis: 2
   m_StartOffset: 0
 --- !u!50 &3798149859553776778
@@ -182,7 +182,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 10.71, y: 6.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

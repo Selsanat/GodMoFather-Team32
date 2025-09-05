@@ -717,6 +717,9 @@ MonoBehaviour:
   onRadioFrequencyLeft:
     m_PersistentCalls:
       m_Calls: []
+  onChosingPlayerPath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

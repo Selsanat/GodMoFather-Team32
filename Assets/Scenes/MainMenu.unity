@@ -923,7 +923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
   MenuCanvasGroup: {fileID: 847574701}
   BackgroundCanvasGroup: {fileID: 2122873673}
-  NextSceneName: Leandro
+  NextSceneName: Scene_Test_GD
 --- !u!4 &2073507105
 Transform:
   m_ObjectHideFlags: 0

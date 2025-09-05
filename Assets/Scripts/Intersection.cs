@@ -37,8 +37,8 @@ public class Intersection : MonoBehaviour
     public void OnCollidedWithPolice(GameObject colision)
     {
         RoadManager.Instance.CurrentIntersections[colision] = this;
-        RoadManager.Instance.MakePoliceTakeRandomTurn(colision);
         CheckPathOrientation(colision.transform.position, colision.GetComponent<SplineAnimate>().splineContainer);
+        RoadManager.Instance.MakePoliceTakeRandomTurn(colision);
     }
 
     public void CheckPathOrientation(Vector2 position, SplineContainer ignore)

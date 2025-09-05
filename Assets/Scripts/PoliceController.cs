@@ -17,5 +17,10 @@ public class PoliceController : MonoBehaviour
         {
             collision.GetComponent<Intersection>().OnCollidedWithPolice(gameObject);
         }
+
+        if (collision.CompareTag("GameOver") || collision.CompareTag("Player"))
+        {
+            GameOverController.Instance.TriggerGameOver();
+        }
     }
 }
