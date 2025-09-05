@@ -24,17 +24,20 @@ public class FollowersManager : MonoBehaviour
     }
 
     public GameObject followerPrefab;
-    List<GameObject> followers = new List<GameObject>();
+    public  List<GameObject> followers = new  List<GameObject>();
 
+    
     public void SpawnFollower(Vector3 position)
     {
+
+        GameManager.followers++;
         GameObject follower = Instantiate(followerPrefab, position, Quaternion.identity);
         followers.Add(follower);
 
         // Calculer la nouvelle taille orthographique
         float targetSize = Camera.Lens.OrthographicSize + dezoomByFollower;
 
-        // Tween pour dézoomer la caméra
+        // Tween pour dï¿½zoomer la camï¿½ra
         DOTween.To(
             () => Camera.Lens.OrthographicSize,
             x => Camera.Lens.OrthographicSize = x,
@@ -42,4 +45,18 @@ public class FollowersManager : MonoBehaviour
             1f
         ).SetEase(Ease.OutQuad);
     }
+
+    private void Update()
+    {
+        
+    }
+
+
+    [NaughtyAttributes.Button]
+    public void Spawn()
+    {
+        GameObject follower = Instantiate(followerPrefab, transform.position, Quaternion.identity);
+        followers.Add(follower);
+    }
+
 }
