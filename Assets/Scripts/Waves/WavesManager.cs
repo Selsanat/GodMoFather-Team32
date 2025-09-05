@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 
 public class WavesManager : MonoBehaviour
 {
-    [SerializeField] private Waves playerWave;
-    [SerializeField] private Waves policeWave;
+    [SerializeField] public Waves playerWave;
+    [SerializeField] public Waves policeWave;
     [SerializeField, Min(0.1f)] float valueChange;
     [SerializeField, Min(1f)] float speed;
     [SerializeField] float offset;
@@ -14,6 +14,19 @@ public class WavesManager : MonoBehaviour
     float timer;
     bool areFaded = false;
     bool wasAmplitudeMatching = false; // Nouveau : pour suivre l'état précédent
+
+    public static WavesManager ins;
+    private void Awake()
+    {
+        if (ins == null)
+        {
+            ins = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {

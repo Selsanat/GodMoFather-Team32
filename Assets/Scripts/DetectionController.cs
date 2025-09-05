@@ -3,6 +3,7 @@ using UnityEngine;
 public class DetectionController : MonoBehaviour
 {
     CircleCollider2D _CircleCollider2D;
+    public GameObject animPrefab;
     void Start()
     {
         _CircleCollider2D = GetComponent<CircleCollider2D>();
@@ -27,6 +28,9 @@ public class DetectionController : MonoBehaviour
         BuildingController bc = collision.GetComponent<BuildingController>();
         if (bc != null)
         {
+            GameObject Go = Instantiate(animPrefab);
+            Go.transform.parent = collision.transform;
+            Go.transform.localPosition = new Vector3(0, 5, 0);
             bc.OnCloseEnough();
         }
     }
