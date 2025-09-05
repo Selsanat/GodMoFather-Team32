@@ -1,6 +1,9 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using DG.Tweening;
 
 public class PoliceManager : MonoBehaviour
 {
@@ -9,6 +12,7 @@ public class PoliceManager : MonoBehaviour
     public Transform Roads;
     public float MinDistanceFromPlayer = 20f;
     public int SpawnInterval = 30; // seconds
+    private List<GameObject> activePoliceCars = new List<GameObject>();
     private void Awake()
     {
         if (Instance == null)
@@ -53,7 +57,24 @@ public class PoliceManager : MonoBehaviour
         }
         if (spawnPoint != null)
         {
-            Instantiate(policeCarPrefab, spawnPoint.position, spawnPoint.rotation);
+            activePoliceCars.Add(Instantiate(policeCarPrefab, spawnPoint.position, spawnPoint.rotation));
+            
+        }
+    }
+
+    public void FadeAllPoliceCars(float value)
+    {
+        print("Fading");
+        foreach (GameObject policeCar in activePoliceCars)
+        {
+            if (policeCar != null)
+            {
+                SpriteRenderer[] renderers = policeCar.GetComponentsInChildren<SpriteRenderer>();
+                foreach (SpriteRenderer renderer in renderers)
+                {
+                    renderer.DOFade(value, 2f);
+                }
+            }
         }
     }
 }
