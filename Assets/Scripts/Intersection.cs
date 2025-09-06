@@ -99,7 +99,7 @@ public class Intersection : MonoBehaviour
         UnityEngine.UI.Image image = instance.GetComponentInChildren<UnityEngine.UI.Image>();
         CanvasGroup canvasGroup = instance.GetComponent<CanvasGroup>();
         SplineContainer splineContainer = obj.GetComponent<SplineContainer>();
-        float3 Origin = splineContainer.EvaluatePosition(0.1f);
+        float3 Origin = splineContainer.EvaluatePosition(0.2f);
         canvasGroup.alpha = 0f;
 
         canvasGroup.DOFade(1f, 0.5f);

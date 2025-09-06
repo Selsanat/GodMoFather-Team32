@@ -91,51 +91,56 @@ public class RoadManager : MonoBehaviour
         {
             if (WaitForInput && CurrentIntersections.ContainsKey(PlayerCar.gameObject) && CurrentIntersections[PlayerCar.gameObject] != null)
             {
+                SplineContainer currentSpline = PlayerCar.GetComponent<SplineAnimate>().Container;
                 Vector2 dpadInput = playerInput.actions["Move"].ReadValue<Vector2>();
                 if (dpadInput.y > 0.5f && CurrentIntersections[PlayerCar.gameObject].Up != null)
                 {
-                    GoUp();
+                    GoUp(currentSpline);
                 }
                 else if (dpadInput.y < -0.5f && CurrentIntersections[PlayerCar.gameObject].Down != null)
                 {
-                    GoDown();
+                    GoDown(currentSpline);
                 }
                 else if (dpadInput.x < -0.5f && CurrentIntersections[PlayerCar.gameObject].Left != null)
                 {
-                    GoLeft();
+                    GoLeft(currentSpline);
                 }
                 else if (dpadInput.x > 0.5f && CurrentIntersections[PlayerCar.gameObject].Right != null)
                 {
-                    GoRight();
+                    GoRight(currentSpline);
                 }
             }
         }
     }
 
     [Button("Go Up")]
-    public void GoUp()
+    public void GoUp(SplineContainer currentSpline)
     {
+        if (CurrentIntersections[PlayerCar.gameObject].Up.GetComponent<SplineContainer>() == currentSpline || !WaitForInput) return;
         MakePlayerFollowSpline(CurrentIntersections[PlayerCar.gameObject].Up.GetComponent<SplineContainer>());
         WaitForInput = false;
         CurrentIntersections[PlayerCar.gameObject] = null;
     }
     [Button("Go Left")]
-    public void GoLeft()
+    public void GoLeft(SplineContainer currentSpline)
     {
+        if (CurrentIntersections[PlayerCar.gameObject].Left.GetComponent<SplineContainer>() == currentSpline || !WaitForInput) return;
         MakePlayerFollowSpline(CurrentIntersections[PlayerCar.gameObject].Left.GetComponent<SplineContainer>());
         WaitForInput = false;
         CurrentIntersections[PlayerCar.gameObject] = null;
     }
     [Button("Go Right")]
-    public void GoRight()
+    public void GoRight(SplineContainer currentSpline)
     {
+        if (CurrentIntersections[PlayerCar.gameObject].Right.GetComponent<SplineContainer>() == currentSpline || !WaitForInput) return;
         MakePlayerFollowSpline(CurrentIntersections[PlayerCar.gameObject].Right.GetComponent<SplineContainer>());
         WaitForInput = false;
         CurrentIntersections[PlayerCar.gameObject] = null;
     }
     [Button("Go Down")]
-    public void GoDown()
+    public void GoDown(SplineContainer currentSpline)
     {
+        if (CurrentIntersections[PlayerCar.gameObject].Down.GetComponent<SplineContainer>() == currentSpline || !WaitForInput) return;
         MakePlayerFollowSpline(CurrentIntersections[PlayerCar.gameObject].Down.GetComponent<SplineContainer>());
         WaitForInput = false;
         CurrentIntersections[PlayerCar.gameObject] = null;

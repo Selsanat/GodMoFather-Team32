@@ -31,6 +31,11 @@ public class EventManager : MonoBehaviour
         instance = this;
     }
 
+    private void Start()
+    {
+        onChosingPlayerPath.AddListener(PlayMoveSFX);
+    }
+
     private void OnEnable()
     {
         moveRight.Enable();
@@ -47,6 +52,7 @@ public class EventManager : MonoBehaviour
 
         radioFrequencyRight.performed += OnRadioFrequencyRight;
         radioFrequencyLeft.performed += OnRadioFrequencyLeft;
+      
     }
 
     private void OnDisable()
@@ -175,4 +181,10 @@ public class EventManager : MonoBehaviour
         }
     }
     #endregion
+
+
+   public void PlayMoveSFX()
+    {
+         AudioManager.instance.PlaySFX("Move");
+    }
 }

@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+
+    public static AudioManager instance;
     public AudioStruct[] AudioStruct;
     public Sounds[] BGSounds;
 
@@ -21,6 +23,16 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            
+        }
         musicSource = transform.Find("Music").GetComponent<AudioSource>();
         SFXSource = transform.Find("SFX").GetComponent<AudioSource>();
         // 
@@ -86,14 +98,18 @@ public class AudioManager : MonoBehaviour
         SFXSource.PlayOneShot(clip);
     }*/
 
-    [NaughtyAttributes.Button]
-    public void PlaySFX()
+    
+    public void PlaySFX(string name)
     {
-        if (AudioStruct == null || AudioStruct.Length==0 && SFXName.Length <=0) return;
-        AudioStruct s = Array.Find(AudioStruct, sound => sound.name == SFXName);
+        //if (AudioStruct == null || AudioStruct.Length==0 && SFXName.Length <=0) return;
+        AudioStruct s = Array.Find(AudioStruct, sound => sound.name == name);
 
+        if (name == "Move")
+        {
+            SFXSource.pitch = UnityEngine.Random.Range(0.5f, 1f);
+        }
+        else SFXSource.pitch = s.pitch;
         SFXSource.volume = s.volume;
-        SFXSource.pitch = s.pitch;
         SFXSource.loop = s.loop;
         SFXSource.PlayOneShot(s.audioClips[UnityEngine.Random.Range(0, s.audioClips.Length)], SFXSource.volume);
     }

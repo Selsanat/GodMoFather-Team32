@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 
 public class WavesManager : MonoBehaviour
 {
-    [SerializeField] private Waves playerWave;
-    [SerializeField] private Waves policeWave;
+    [SerializeField] public Waves playerWave;
+    [SerializeField] public Waves policeWave;
     [SerializeField, Min(0.1f)] float valueChange;
     [SerializeField, Min(1f)] float speed;
     [SerializeField] float offset;
@@ -13,20 +13,33 @@ public class WavesManager : MonoBehaviour
     private Gamepad gamepad;
     float timer;
     bool areFaded = false;
-    bool wasAmplitudeMatching = false; // Nouveau : pour suivre l'état précédent
+    bool wasAmplitudeMatching = false; // Nouveau : pour suivre l'ï¿½tat prï¿½cï¿½dent
+
+    public static WavesManager ins;
+    private void Awake()
+    {
+        if (ins == null)
+        {
+            ins = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
         timer = duration;
         RandomizePoliceWave();
 
-        // Initialiser l'état de correspondance d'amplitude
+        // Initialiser l'ï¿½tat de correspondance d'amplitude
         wasAmplitudeMatching = VerifyAmplitude();
 
         if (wasAmplitudeMatching)
         {
             playerWave.amplitude -= offset;
-            // Mettre à jour l'état après modification
+            // Mettre ï¿½ jour l'ï¿½tat aprï¿½s modification
             wasAmplitudeMatching = VerifyAmplitude();
         }
 
@@ -45,25 +58,26 @@ public class WavesManager : MonoBehaviour
             timer = duration;
         }
 
-        // Vérifier l'état actuel de l'amplitude
+        // Vï¿½rifier l'ï¿½tat actuel de l'amplitude
         bool currentAmplitudeMatching = VerifyAmplitude();
 
-        // Détecter les changements d'état et appeler la fonction
+        // Dï¿½tecter les changements d'ï¿½tat et appeler la fonction
         if (currentAmplitudeMatching != wasAmplitudeMatching)
         {
             
             if (currentAmplitudeMatching)
             {
+                AudioManager.instance.PlaySFX("AmplitudeDone");
                 PoliceManager.Instance.FadeAllPoliceCars(1);
             }
             else
             {
                 PoliceManager.Instance.FadeAllPoliceCars(0);
             }
-                Debug.Log($"Changement d'état détecté : {(currentAmplitudeMatching ? "Amplitudes correspondent" : "Amplitudes ne correspondent plus")}");
+                Debug.Log($"Changement d'ï¿½tat dï¿½tectï¿½ : {(currentAmplitudeMatching ? "Amplitudes correspondent" : "Amplitudes ne correspondent plus")}");
         }
 
-        // Mettre à jour l'état précédent
+        // Mettre ï¿½ jour l'ï¿½tat prï¿½cï¿½dent
         wasAmplitudeMatching = currentAmplitudeMatching;
 
         if (!currentAmplitudeMatching)
@@ -75,11 +89,9 @@ public class WavesManager : MonoBehaviour
 
             if (gamepad != null)
             {
-                // Lire les valeurs des gâchettes (0.0 à 1.0)
                 float rightTrigger = gamepad.rightTrigger.ReadValue();
                 float leftTrigger = gamepad.leftTrigger.ReadValue();
 
-                // Détection avec seuil
                 if (rightTrigger > 0.1f)
                 {
                     playerWave.amplitude -= valueChange * Time.deltaTime * speed;
@@ -104,6 +116,7 @@ public class WavesManager : MonoBehaviour
         if (playerWave.amplitude >= (policeWave.amplitude - offset) && playerWave.amplitude <= (policeWave.amplitude + offset))
         {
             CancelInvoke("RandomizePoliceWave");
+            
             return true;
         }
         return false;
